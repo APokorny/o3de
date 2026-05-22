@@ -2013,6 +2013,7 @@ namespace AZ
         template<class T>
         static bool Set(BehaviorArgument& param, T&& result, bool IsValueCopy)
         {
+            AZ_PUSH_DISABLE_WARNING_GCC("-Wdangling-pointer")
             using Type = AZStd::decay_t<T>;
             if (param.m_traits & BehaviorParameter::TR_POINTER)
             {
@@ -2065,6 +2066,7 @@ namespace AZ
                 return true;
             }
             return false;
+            AZ_POP_DISABLE_WARNING_GCC
         }
     };
 
