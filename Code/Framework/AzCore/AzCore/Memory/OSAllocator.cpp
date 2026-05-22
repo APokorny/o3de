@@ -114,7 +114,9 @@ namespace AZ
 #if defined(AZ_ENABLE_TRACING)
         m_numAllocatedBytes += (allocatedSize - previouslyAllocatedSize);
         AZ_PROFILE_MEMORY_ALLOC_EX(MemoryReserved, fileName, lineNum, address, byteSize, name);
+        AZ_PUSH_DISABLE_WARNING_GCC("-Wuse-after-free")
         AZ_MEMORY_PROFILE(ProfileReallocation(ptr, newPtr, allocatedSize, 1));
+        AZ_POP_DISABLE_WARNING_GCC
 #endif
 
         return AllocateAddress{ newPtr, allocatedSize };
