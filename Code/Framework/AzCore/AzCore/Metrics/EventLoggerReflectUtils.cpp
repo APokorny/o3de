@@ -495,8 +495,11 @@ namespace AZ::Metrics
                     eventPhaseArgs.VisitArgs(AppendArgFields);
                     asyncArgs.m_args = eventFields;
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdangling-pointer"
                     asyncArgs.m_id = eventPhaseArgs.m_id.value_or(AZStd::string_view{});
                     recordOutcome = AZ::Metrics::Utility::RecordEvent(eventLoggerId, eventPhase, asyncArgs, eventLoggerFactory);
+#pragma GCC diagnostic pop
                     break;
                 }
             }
