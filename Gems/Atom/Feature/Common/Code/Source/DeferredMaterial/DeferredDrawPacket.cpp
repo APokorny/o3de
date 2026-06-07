@@ -147,9 +147,13 @@ namespace AZ::Render
             // This draw item purposefully does not reference any geometry buffers.
             // Instead it's expected that the vertex shader generates a full-screen triangle completely from vertex ids.
             m_geometryView = AZStd::make_shared<RHI::GeometryView>(RHI::GeometryView{ RHI::MultiDevice::AllDevices });
-            RHI::DrawLinear draw = RHI::DrawLinear();
+            // TODO 
+            //RHI::DrawLinear draw = RHI::DrawLinear();
+            //draw.m_vertexCount = 3;
+            //m_geometryView->SetDrawArguments(RHI::DrawLinear(3, 0));
+            RHI::DrawLinear draw{3,0};
             draw.m_vertexCount = 3;
-            m_geometryView->SetDrawArguments(RHI::DrawLinear(3, 0));
+            m_geometryView->SetDrawArguments(draw);
 
             m_rootConstantsLayout = pipelineStateDescriptor.m_pipelineLayoutDescriptor->GetRootConstantsLayout();
             bool hasRootConstants = m_rootConstantsLayout && m_rootConstantsLayout->GetDataSize() > 0;
